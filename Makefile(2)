@@ -1,0 +1,32 @@
+# Makefile
+
+# Compiler and compiler flags
+CXX = g++
+CXXFLAGS = -Wall -g
+
+# The build target executable:
+TARGET = demo
+
+# All source files
+SOURCES = Demo.cpp Graph.cpp Algorithms.cpp
+
+# Object files are source files with .cpp replaced by .o
+OBJECTS = $(SOURCES:.cpp=.o)
+
+# The default target, which is built when you run 'make'
+all: $(TARGET)
+
+# Rule to link the program
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
+
+# Rule to compile source files into object files
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $<
+
+# Clean up
+clean:
+	rm -f $(OBJECTS) $(TARGET)
+
+# Phony targets
+.PHONY: all clean
